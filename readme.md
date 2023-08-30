@@ -2,7 +2,9 @@
 # Sistema De Facturacion (SDF)
 
 > El sistema pide fecha de emision y monto
+
 > Las facturas tienen una fecha de vencimiento de 30 dias que el sistema debe calcular automaticamente
+
 > El sistema tambien debe permitir la carga de intereses de las facturas impagas, en este caso se debe permitir el ingreso de dias y porcentaje de intereses. por ejemplo:
     1 dia 5%
     2 a 4 dias 7%

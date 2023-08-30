@@ -13,55 +13,46 @@
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
                 <ul class="navbar-nav">
+
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Facturas</a>
+                        <a class="nav-link active" href="index.php?pagina=inicio">Inicio</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Intereses</a>
+                        <a class="nav-link" href="index.php?pagina=facturar">Facturar</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Totales</a>
+                        <a class="nav-link" href="index.php?pagina=intereses">Intereses</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    
                 </ul>
             </div>
         </nav>
     </header>
 
     <main>
-        <div class="Tabla">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Monto</th>
-                        <th scope="col">Vencimiento</th>
-                        <th scope="col">Interes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <div class="container-fluid">
+            <div class="container py-5">
+                <?php
+                    if(isset($_GET['pagina'])){
+
+                        if($_GET['pagina'] == "inicio" ||
+                        $_GET['pagina'] == "facturar" ||
+                        $_GET['pagina'] == "intereses" ){
+                            include "pages/".$_GET['pagina'] .".php";
+                        }else{
+                        include "pages/error404.php";
+                        }
+    
+                    }else{
+                        include "pages/inicio.php";
+                    }
+                ?>
+            </div>
         </div>
+
     </main>
 
     <footer></footer>
