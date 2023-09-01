@@ -36,7 +36,7 @@ class ModelosFormularios{
     #region SeleccionarFacturas
 
     public static function mdlSeleccionarFacturas($tabla){
-        $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, DATE_FORMAT(factFecIni,'%d/%m/%Y') as factFecIni, DATE_FORMAT(factFecVen,'%d/%m/%Y') as factFecVen from facturas inner join intereses on facturas.interes = intereses.inteID order by factID ASC;");
+        $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, DATE_FORMAT(factFecIni,'%d/%m/%Y') as factFecIni, DATE_FORMAT(factFecVen,'%d/%m/%Y') as factFecVen from $tabla inner join intereses on facturas.interes = intereses.inteID order by factID ASC;");
 
         $stmt->execute();
 
@@ -68,6 +68,23 @@ class ModelosFormularios{
         }
     }
     #endregion
+
+    #region SeleccionarIntereses
+
+    static public function mdlSeleccionarIntereses($tabla){
+        
+        $stmt = Conexion::contectar()->prepare("select * from $tabla;");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->closeCursor();
+        $stmt = null;
+    }
+
+    #endregion
+
 
 }
 

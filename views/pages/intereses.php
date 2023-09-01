@@ -18,11 +18,54 @@
 
         $Mensaje = ControladorFormularios::ctrIngresarInteres();
         if (isset($Mensaje)) {
-            echo '<pre>'; print_r($Mensaje); echo '</pre>';
+            switch ($Mensaje) {
+                case 1:
+                    echo "<div class='alert alert-success'>Intereses guardados</div>";
+                    break;
+            }
+            echo '<script>
+                        
+                            if(window.history.replaceState){
+                                window.history.replaceState(null,null,window.location.href );
+                            }
+                        </script>';
         }
+
+        $intereses = ControladorFormularios::ctrTraerIntereses();
+
         ?>
 
         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i></button>
+
+
+
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Seleccion</th>
+                    <th scope="col">Cantidad Dias</th>
+                    <th scope="col">Interes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($intereses as $interes) :
+                ?>
+                    <tr>
+                        <td scope="row">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" name="dias" class="form-check-input" value=" <?php echo $interes['inteDia'] ?> ">
+                                </label>
+                            </div>
+                        </td>
+                        <td scope="row"><?php echo $interes['inteDia']; ?></td>
+                        <td scope="row"><?php echo $interes['intePorce']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+
     </form>
 
 
