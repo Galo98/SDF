@@ -3,10 +3,9 @@ create database SDF;
 use SDF;
 
 create table intereses(
-    inteID int auto_increment,
-    inteDia int,
+    inteDia int unique,
     intePorce int,
-    primary key (inteID,inteDia)
+    primary key (inteDia)
 );
 
 create table facturas(
@@ -16,5 +15,7 @@ create table facturas(
     factFecVen date,
     interes int,
     primary key (factID,factFecIni),
-    foreign key (interes) references intereses(inteID)
+    foreign key (interes) references intereses(inteDia)
 );
+
+insert into intereses values (0,0);
