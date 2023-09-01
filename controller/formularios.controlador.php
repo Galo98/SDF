@@ -4,7 +4,7 @@
 
         #region ingresarFactura
 
-       static public function ctrFactura(){
+       static public function ctrIngresarFactura(){
             
             if(isset($_POST['f-Monto']) && isset($_POST['f-Fecha'])){
                 $tabla = "facturas";
@@ -17,6 +17,17 @@
 
         #endregion
 
+
+        #region TraerFacturas
+
+        static public function ctrTraerFacturas(){
+            $tabla = "facturas";
+            $respuesta = ModelosFormularios::mdlSeleccionarFacturas($tabla);
+
+            return $respuesta;
+        }
+
+        #endregion
     }
 
 
