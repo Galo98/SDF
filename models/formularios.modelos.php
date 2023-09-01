@@ -45,9 +45,33 @@ class ModelosFormularios{
         $stmt->closeCursor();
         $stmt = null;
     }
+    #endregion
+
+    #region ingresoDeIntereses
+
+    static public function mdlIngresoDeIntereses($tabla, $datos)
+    {
+        $stmt = Conexion::contectar()->prepare("INSERT INTO $tabla (inteDia, intePorce) VALUES (:inteDia, :intePorce);");
+
+        if ($stmt) {
+            foreach ($datos["inteDia"] as $key => $dia) {
+                $stmt->bindParam(":inteDia", $datos["inteDia"][$key], PDO::PARAM_STR);
+                $stmt->bindParam(":intePorce", $datos["intePorce"][$key], PDO::PARAM_STR);
+                $stmt->execute();
+            }
+
+            $stmt->closeCursor();
+            $stmt = null;
+            return 1; // Éxito
+        } else {
+            return 2; // Error
+        }
+    }
+    #endregion
+
 }
 
-$con = Conexion::contectar();
+
 
 
 ?>
