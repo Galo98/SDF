@@ -40,7 +40,8 @@
 
                         if($_GET['pagina'] == "inicio" ||
                         $_GET['pagina'] == "facturar" ||
-                        $_GET['pagina'] == "intereses" ){
+                        $_GET['pagina'] == "intereses" ||
+                        $_GET['pagina'] == "ediFact" ){
                             include "pages/".$_GET['pagina'] .".php";
                         }else{
                         include "pages/error404.php";

@@ -22,7 +22,6 @@
                 ($cuenta == 0) ? $total = $factura['factMonto'] : $total = $cuenta;
             ?>
              <tr>
-                 <td scope="row"><?php echo $factura['factID']; ?></td>
                  <td scope="row"><?php echo $factura['factFecIni']; ?></td>
                  <td scope="row"><?php echo $factura['factMonto']; ?></td>
                  <td scope="row"><?php echo $factura['factFecVen']; ?></td>
@@ -30,7 +29,7 @@
                  <td scope="row"><?php echo $total; ?></td>
                  <td scope="row">
                      <div class="btn-group">
-                         <button class="btn btn-warning"><i class="fa-solid fa-pencil" style="color: #1e3050;"></i></button>
+                         <a class="btn btn-warning" href="index.php?pagina=ediFact&factID=<?php echo $factura['factID'] ?>"><i class="fa-solid fa-pencil" style="color: #1e3050;"></i></a>
                          <button class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>
                      </div>
                  </td>

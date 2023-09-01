@@ -4,7 +4,7 @@ select * from facturas;
 
 insert into facturas (factMonto,factFecIni,factFecVen,interes) values (monto,"fechaini"."fechaVen",interes);
 
-delete from facturas where factID in (2,3);
+delete from facturas where factID BETWEEN 1 and 4;
 insert into intereses  (inteDia,intePorce) values (0,0);
 select * from facturas;
 select * from intereses;
