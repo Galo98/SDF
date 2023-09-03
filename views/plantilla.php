@@ -13,19 +13,49 @@
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
                 <ul class="navbar-nav">
+                    <?php if (isset($_GET['pagina'])) : ?>
+                        <?php if ($_GET['pagina'] == "inicio") : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=inicio">Inicio</a>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?pagina=inicio">Inicio</a>
+                            </li>
+                        <?php endif ?>
+                        <?php if ($_GET['pagina'] == "facturar") : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=facturar">Facturar</a>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?pagina=facturar">Facturar</a>
+                            </li>
+                        <?php endif ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.php?pagina=inicio">Inicio</a>
-                    </li>
+                        <?php if ($_GET['pagina'] == "intereses") : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=intereses">Intereses</a>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?pagina=intereses">Intereses</a>
+                            </li>
+                        <?php endif ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?pagina=facturar">Facturar</a>
-                    </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php?pagina=inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?pagina=facturar">Facturar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?pagina=intereses">Intereses</a>
+                        </li>
+                    <?php endif ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?pagina=intereses">Intereses</a>
-                    </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -36,20 +66,21 @@
         <div class="container-fluid">
             <div class="container py-5">
                 <?php
-                    if(isset($_GET['pagina'])){
+                if (isset($_GET['pagina'])) {
 
-                        if($_GET['pagina'] == "inicio" ||
+                    if (
+                        $_GET['pagina'] == "inicio" ||
                         $_GET['pagina'] == "facturar" ||
                         $_GET['pagina'] == "intereses" ||
-                        $_GET['pagina'] == "ediFact" ){
-                            include "pages/".$_GET['pagina'] .".php";
-                        }else{
+                        $_GET['pagina'] == "ediFact"
+                    ) {
+                        include "pages/" . $_GET['pagina'] . ".php";
+                    } else {
                         include "pages/error404.php";
-                        }
-    
-                    }else{
-                        include "pages/inicio.php";
                     }
+                } else {
+                    include "pages/inicio.php";
+                }
                 ?>
             </div>
         </div>
