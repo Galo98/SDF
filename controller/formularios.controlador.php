@@ -67,6 +67,7 @@
                         $inicio++;
                     }
                 }
+                echo '<pre>'; print_r($genDias); echo '</pre>';
                 $datos = $genDias;
                 $codMsj = ModelosFormularios::mdlIngresoDeIntereses($tabla, $datos);
 
@@ -86,7 +87,7 @@
 
     #region ActualizarIntereses
         static public function ctrActualizarIntereses(){
-            if(isset($_POST['interes'])){
+            if(isset($_POST['ediDias']) && $_POST['ediDias'] != null){
                 $tabla = "intereses";
                 $dias = $_POST['ediDias'];
                 $porce = $_POST['interes'];

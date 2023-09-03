@@ -86,7 +86,7 @@ class ModelosFormularios{
 
     static public function mdlIngresoDeIntereses($tabla, $datos){
         $stmt = Conexion::contectar()->prepare("INSERT INTO $tabla (inteDia, intePorce) VALUES (:inteDia, :intePorce);");
-
+        echo '<pre>'; print_r($datos['inteDia']); echo '</pre>';
         if ($stmt) {
             foreach ($datos["inteDia"] as $key => $dia) {
                 $stmt->bindParam(":inteDia", $datos["inteDia"][$key], PDO::PARAM_STR);
@@ -96,10 +96,12 @@ class ModelosFormularios{
 
             $stmt->closeCursor();
             $stmt = null;
-            return 1; // Éxito
+            $err = 1;
         } else {
-            return 2; // Error
+            $err = 2;
         }
+
+        return $err;
     }
     #endregion
 
