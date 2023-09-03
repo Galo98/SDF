@@ -26,9 +26,9 @@ class ModelosFormularios{
             $err=Conexion::contectar()->errorInfo();
         }
         
+        return $err;
         $stmt->closeCursor();
         $stmt = null;
-        return $err;
     }
 
     #endregion
@@ -149,6 +149,24 @@ class ModelosFormularios{
             $err = 1;
         } else {
             $err = 2;
+        }
+
+        return $err;
+
+        $stmt->closeCursor();
+        $stmt = null;
+    }
+    #endregion
+
+    #region ActualizarInteresesPorVencimiento
+    static public function mdlAIPV($tabla){
+        $stmt = Conexion::contectar()->prepare("UPDATE facturas AS f LEFT JOIN intereses AS i ON DATEDIFF(CURDATE(), f.factFecVen) = i.inteDia SET f.interes = IFNULL(i.inteDia, (SELECT MAX(inteDia) FROM intereses)) WHERE f.factFecVen < CURDATE();");
+
+        if ($stmt->execute()) {
+            $err = 1;
+        } else {
+            $errorInfo = $stmt->errorInfo();
+            $err = $errorInfo[2];
         }
 
         return $err;

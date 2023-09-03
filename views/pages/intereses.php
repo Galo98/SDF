@@ -71,7 +71,7 @@
                             </div>
                         </td>
                         <td class="text-center" scope="row"><?php echo $interes['inteDia']; ?></td>
-                        <td class="text-center" scope="row"><?php echo $interes['intePorce']; ?></td>
+                        <td class="text-center" scope="row"><?php echo $interes['intePorce'] . "%"; ?></td>
                     </tr>
                 <?php endforeach; ?>
 

@@ -122,6 +122,27 @@
 
     #endregion
 
+    #region ActualizarInteresesPorVencimiento
+        static public function ctrAIPV(){
+            if(isset($_GET['AIPV'])){
+                $tabla = "facturas";
+                $codMsj = ModelosFormularios::mdlAIPV($tabla);
+
+            if ($codMsj == 1) {
+                echo "<script>
+                        if(window.history.replaceState){
+                            window.history.replaceState(null,null,window.location.href);
+                        }
+
+                        window.location = 'index.php?pagina=inicio';
+                    </script>";
+            } else {
+                echo "<div class='alert alert-success'>No se pudo eliminar, " . $codMsj . "</div>";
+            }
+            }
+        }
+    #endregion
+
     }
 
 ?>
