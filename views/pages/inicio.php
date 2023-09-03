@@ -1,12 +1,14 @@
  <?php
     $AIPV = ControladorFormularios::ctrAIPV();
     $facturas = ControladorFormularios::ctrTraerFacturas(null, null);
-    if(isset($AIPV)){
-        echo '<pre class="d-flex justify-content-center mb-3">'; print_r($AIPV); echo '</pre>';
+    if (isset($AIPV)) {
+        echo '<pre class="d-flex justify-content-center mb-3">';
+        print_r($AIPV);
+        echo '</pre>';
     }
     ?>
  <div class="d-flex justify-content-center mb-3">
-     <a class="btn btn-warning" href="index.php?pagina=inicio&AIPV=0">Actualizar intereses</a>
+     <a class="btn btn btn-outline-warning btn-lg" href="index.php?pagina=inicio&AIPV=0">Actualizar intereses</a>
  </div>
 
  <table class="table">
@@ -30,7 +32,7 @@
                  <td class="text-center" scope="row"><?php echo $factura['factFecIni']; ?></td>
                  <td class="text-center" scope="row"><?php echo $factura['factMonto']; ?></td>
                  <td class="text-center" scope="row"><?php echo $factura['factFecVen']; ?></td>
-                 <td class="text-center" scope="row"><?php echo $factura['intePorce']. "%"; ?></td>
+                 <td class="text-center" scope="row"><?php echo $factura['intePorce'] . "%"; ?></td>
                  <td class="text-center" scope="row"><?php echo $total; ?></td>
                  <td class="text-center" scope="row">
                      <div class="btn-group">
