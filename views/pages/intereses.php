@@ -31,13 +31,11 @@
                         </script>';
         }
 
-        $intereses = ControladorFormularios::ctrTraerIntereses();
-
         ?>
 
         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i></button>
 
-
+        <?php $intereses = ControladorFormularios::ctrTraerIntereses();?>
 
         <table class="table mt-3">
             <thead>
@@ -54,7 +52,7 @@
                         <td scope="row">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" name="dias" class="form-check-input" value=" <?php echo $interes['inteDia'] ?> ">
+                                    <input type="checkbox" name="dias[]" class="form-check-input" value=" <?php echo $interes['inteDia'] ?> ">
                                 </label>
                             </div>
                         </td>

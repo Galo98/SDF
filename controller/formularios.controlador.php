@@ -39,6 +39,7 @@
                         $genDias["inteDia"][] = $dia;
                         $genDias["intePorce"][] = $_POST['interes'];
                     }
+                    echo '<pre>'; print_r($genDias); echo '</pre>';
                 } else {
                     $diasSeparados = explode("-", $_POST['dias']);
                     $inicio = $diasSeparados[0];

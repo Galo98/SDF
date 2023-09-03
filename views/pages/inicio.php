@@ -7,7 +7,6 @@
  <table class="table">
      <thead>
          <tr>
-             <th scope="col">NroFactura</th>
              <th scope="col">Fecha</th>
              <th scope="col">Monto</th>
              <th scope="col">Vencimiento</th>
