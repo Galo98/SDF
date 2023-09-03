@@ -1,8 +1,8 @@
  <?php
 
-    $facturas = ControladorFormularios::ctrTraerFacturas(null,null);
+    $facturas = ControladorFormularios::ctrTraerFacturas(null, null);
 
-?>
+    ?>
 
  <table class="table">
      <thead>
@@ -28,8 +28,17 @@
                  <td class="text-center" scope="row"><?php echo $total; ?></td>
                  <td class="text-center" scope="row">
                      <div class="btn-group">
-                         <a class="btn btn-warning" href="index.php?pagina=ediFact&factID=<?php echo $factura['factID'] ?>"><i class="fa-solid fa-pencil" style="color: #1e3050;"></i></a>
-                         <button class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>
+                         <div class="px-1">
+                             <a class="btn btn-warning" href="index.php?pagina=ediFact&factID=<?php echo $factura['factID'] ?>"><i class="fa-solid fa-pencil" style="color: #1e3050;"></i></a>
+                         </div>
+                             <form method="POST">
+                                 <input type="hidden" name="eliFact" value="<?php echo $factura['factID'] ?>">
+                                 <button type="submit" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>
+                                 <?php 
+                                    $eliminar = new ControladorFormularios();
+                                    $eliminar -> ctrEliminarFactura();
+                                 ?>
+                             </form>
                      </div>
                  </td>
              </tr>

@@ -23,7 +23,7 @@ class ModelosFormularios{
         if($stmt->execute()){
             $err = 1;
         }else{
-            $err = 2;
+            $err=Conexion::contectar()->errorInfo();
         }
         
         $stmt->closeCursor();
@@ -72,7 +72,7 @@ class ModelosFormularios{
         if ($stmt->execute()) {
             $err = 1;
         } else {
-            $err = 2;
+            $err=Conexion::contectar()->errorInfo();
         }
 
         $stmt->closeCursor();
@@ -82,11 +82,26 @@ class ModelosFormularios{
     }
     #endregion
 
+    #region EliminarFactura
+    static public function mdlEliminarFactura($tabla,$datos){
+        $stmt = Conexion::contectar()->prepare("delete from $tabla where factID = :factID;");
+        $stmt -> bindParam(":factID",$datos,PDO::PARAM_INT);
+
+        if($stmt->execute()){
+            $err = 1;
+        }else{
+            $err=Conexion::contectar()->errorInfo();
+        }
+        return $err;
+        $stmt->closeCursor();
+        $stmt=null;
+    }
+    #endregion
+
     #region ingresoDeIntereses
 
     static public function mdlIngresoDeIntereses($tabla, $datos){
         $stmt = Conexion::contectar()->prepare("INSERT INTO $tabla (inteDia, intePorce) VALUES (:inteDia, :intePorce);");
-        echo '<pre>'; print_r($datos['inteDia']); echo '</pre>';
         if ($stmt) {
             foreach ($datos["inteDia"] as $key => $dia) {
                 $stmt->bindParam(":inteDia", $datos["inteDia"][$key], PDO::PARAM_STR);
@@ -98,7 +113,7 @@ class ModelosFormularios{
             $stmt = null;
             $err = 1;
         } else {
-            $err = 2;
+            $err=Conexion::contectar()->errorInfo();
         }
 
         return $err;
@@ -137,6 +152,9 @@ class ModelosFormularios{
         }
 
         return $err;
+
+        $stmt->closeCursor();
+        $stmt = null;
     }
     #endregion
 }

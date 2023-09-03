@@ -35,8 +35,8 @@ if (isset($_GET['factID'])) {
                     case 1:
                         echo "<div class='alert alert-success'>Factura Actualizada</div>";
                         break;
-                    case 2:
-                        echo "<div class='alert alert-success'>No se pudo actualizar la factura</div>";
+                    default:
+                        echo "<div class='alert alert-success'>No se pudo actualizar la factura ".$Mensaje ."</div>";
                         break;
                 }
                 echo '<script>

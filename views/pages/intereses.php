@@ -19,13 +19,10 @@
         $actualizar = ControladorFormularios::ctrActualizarIntereses();
         $Mensaje = ControladorFormularios::ctrIngresarInteres();
         if (isset($Mensaje)) {
-            switch ($Mensaje) {
-                case 1:
-                    echo "<div class='alert alert-success'>Intereses guardados</div>";
-                    break;
-                case 2:
-                    echo "<div class='alert alert-success'>No se pudo guardar los intereses</div>";
-                    break;
+            if($Mensaje == 1){
+                echo "<div class='alert alert-success'>Intereses guardados</div>";
+            }else{
+                echo "<div class='alert alert-success'>No se pudo guardar los intereses" . $Mensaje . "</div>";
             }
             echo '<script>
                         
@@ -35,13 +32,10 @@
                         </script>';
         }
         if (isset($actualizar)) {
-            switch ($actualizar) {
-                case 1:
-                    echo "<div class='alert alert-success'>Intereses actualizados</div>";
-                    break;
-                case 2:
-                    echo "<div class='alert alert-success'>No se pudo actualizar los intereses</div>";
-                    break;
+            if($actualizar == 1){
+                echo "<div class='alert alert-success'>Intereses actualizados</div>";
+            }else{
+                echo "<div class='alert alert-success'>No se pudo actualizar los intereses</div>";
             }
             echo '<script>
                         

@@ -45,19 +45,41 @@
 
     #endregion
 
+    #region EliminarFactura
+        public function ctrEliminarFactura(){
+            if(isset($_POST['eliFact'])){
+                $tabla = "facturas";
+                $datos = $_POST['eliFact'];
+
+                $codMsj = ModelosFormularios::mdlEliminarFactura($tabla,$datos);
+
+                if($codMsj == 1){
+                    echo "<script>
+                        if(window.history.replaceState){
+                            window.history.replaceState(null,null,window.location.href);
+                        }
+
+                        window.location = 'index.php?pagina=inicio';
+                    </script>";
+                }else{
+                    echo "<div class='alert alert-success'>No se pudo eliminar, " .$codMsj ."</div>";
+                }
+            }
+        }
+    #endregion
+
     #region ingresarInteres
         static public function ctrIngresarInteres(){
             if (isset($_POST['interes']) && isset($_POST['dias']) && $_POST['dias'] != null) {
                 $tabla = "intereses";
                 $genDias = array(); // Define $genDias fuera de los bloques condicionales
-
+                
                 if (is_array($_POST['dias'])) {
                     foreach ($_POST['dias'] as $dia) {
                         $genDias["inteDia"][] = $dia;
                         $genDias["intePorce"][] = $_POST['interes'];
                     }
-                    echo '<pre>'; print_r($genDias); echo '</pre>';
-                } else {
+                } else if (strpos($_POST['dias'], '-')) {
                     $diasSeparados = explode("-", $_POST['dias']);
                     $inicio = $diasSeparados[0];
                     $fin = $diasSeparados[1];
@@ -66,6 +88,9 @@
                         $genDias["intePorce"][] = $_POST['interes'];
                         $inicio++;
                     }
+                } else {
+                    $genDias['inteDia'][] = $_POST['dias'];
+                    $genDias["intePorce"][] = $_POST['interes'];
                 }
                 echo '<pre>'; print_r($genDias); echo '</pre>';
                 $datos = $genDias;
