@@ -92,7 +92,6 @@
                     $genDias['inteDia'][] = $_POST['dias'];
                     $genDias["intePorce"][] = $_POST['interes'];
                 }
-                echo '<pre>'; print_r($genDias); echo '</pre>';
                 $datos = $genDias;
                 $codMsj = ModelosFormularios::mdlIngresoDeIntereses($tabla, $datos);
 
