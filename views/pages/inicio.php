@@ -1,6 +1,6 @@
  <?php
 
-    $facturas = ControladorFormularios::ctrTraerFacturas();
+    $facturas = ControladorFormularios::ctrTraerFacturas(null,null);
 
 ?>
 

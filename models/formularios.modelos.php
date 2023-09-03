@@ -32,18 +32,48 @@ class ModelosFormularios{
 
     #endregion
 
-
     #region SeleccionarFacturas
 
-    public static function mdlSeleccionarFacturas($tabla){
-        $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, DATE_FORMAT(factFecIni,'%d/%m/%Y') as factFecIni, DATE_FORMAT(factFecVen,'%d/%m/%Y') as factFecVen from $tabla inner join intereses on facturas.interes = intereses.inteDia order by factID ASC;");
+    public static function mdlSeleccionarFacturas($tabla,$item,$valor){
 
-        $stmt->execute();
+        if($item == null && $valor == null){
 
-        return $stmt->fetchAll();
+            $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, DATE_FORMAT(factFecIni,'%d/%m/%Y') as factFecIni, DATE_FORMAT(factFecVen,'%d/%m/%Y') as factFecVen from $tabla inner join intereses on facturas.interes = intereses.inteDia order by factID ASC;");
+
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }else{
+            $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce from $tabla inner join intereses on facturas.interes = intereses.inteDia where $item = $valor;");
+
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+
+
 
         $stmt->closeCursor();
         $stmt = null;
+    }
+    #endregion
+
+    #region ActualizarFacturas
+    static public function mdlActualizarFactura($tabla, $datos){
+        $stmt = Conexion::contectar()->prepare("update $tabla set factMonto =:factMonto , factFecIni=:factFecIni where factID = :factID");
+
+        $stmt->bindParam(":factMonto",$datos['factMonto']);
+        $stmt->bindParam(":factFecIni", $datos['factFecIni']);
+        $stmt->bindParam(":factID", $datos['factID']);
+        
+        if ($stmt->execute()) {
+            $err = 1;
+        } else {
+            $err = 2;
+        }
+
+        $stmt->closeCursor();
+        $stmt = null;
+        return $err;
+
     }
     #endregion
 

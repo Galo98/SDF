@@ -18,11 +18,29 @@
 
     #region TraerFacturas
 
-        static public function ctrTraerFacturas(){
+        static public function ctrTraerFacturas($item,$valor){
             $tabla = "facturas";
-            $respuesta = ModelosFormularios::mdlSeleccionarFacturas($tabla);
+            $respuesta = ModelosFormularios::mdlSeleccionarFacturas($tabla,$item,$valor);
 
             return $respuesta;
+        }
+
+    #endregion
+
+    #region ActualizarFacturas
+
+        static public function ctrActualizarFactura(){
+        if (isset($_POST['editF-ID'])) {
+            $tabla = "facturas";
+            $datos = array(
+                "factMonto" => $_POST['editF-Monto'],
+                "factFecIni" => $_POST['editF-Fecha'],
+                "factID" => $_POST['editF-ID'],
+            );
+            $codMsj = ModelosFormularios::mdlActualizarFactura($tabla, $datos);
+        }
+
+        return $codMsj;
         }
 
     #endregion

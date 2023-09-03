@@ -16,3 +16,13 @@ SELECT
 FROM facturas
     INNER JOIN intereses ON facturas.interes = intereses.inteID
 ORDER BY factID asc;
+
+use SDF;
+
+select
+    facturas.*,
+    intereses.intePorce
+from facturas
+    inner join intereses on facturas.interes = intereses.inteDia
+where factID = 5
+order by factID ASC;
