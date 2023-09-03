@@ -60,24 +60,24 @@
         <table class="table mt-3">
             <thead>
                 <tr>
-                    <th scope="col">Seleccion</th>
-                    <th scope="col">Cantidad Dias</th>
-                    <th scope="col">Interes</th>
+                    <th class="text-center" scope="col">Seleccion</th>
+                    <th class="text-center" scope="col">Cantidad Dias</th>
+                    <th class="text-center" scope="col">Interes</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($intereses as $interes) :
                 ?>
                     <tr>
-                        <td scope="row">
+                        <td class="text-center" scope="row">
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input type="checkbox" name="ediDias[]" class="form-check-input" value=" <?php echo $interes['inteDia'] ?> ">
                                 </label>
                             </div>
                         </td>
-                        <td scope="row"><?php echo $interes['inteDia']; ?></td>
-                        <td scope="row"><?php echo $interes['intePorce']; ?></td>
+                        <td class="text-center" scope="row"><?php echo $interes['inteDia']; ?></td>
+                        <td class="text-center" scope="row"><?php echo $interes['intePorce']; ?></td>
                     </tr>
                 <?php endforeach; ?>
 
