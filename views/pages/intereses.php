@@ -16,11 +16,31 @@
 
         <?php
 
+        $actualizar = ControladorFormularios::ctrActualizarIntereses();
         $Mensaje = ControladorFormularios::ctrIngresarInteres();
         if (isset($Mensaje)) {
             switch ($Mensaje) {
                 case 1:
                     echo "<div class='alert alert-success'>Intereses guardados</div>";
+                    break;
+                case 2:
+                    echo "<div class='alert alert-success'>No se pudo guardar los intereses</div>";
+                    break;
+            }
+            echo '<script>
+                        
+                            if(window.history.replaceState){
+                                window.history.replaceState(null,null,window.location.href );
+                            }
+                        </script>';
+        }
+        if (isset($actualizar)) {
+            switch ($actualizar) {
+                case 1:
+                    echo "<div class='alert alert-success'>Intereses actualizados</div>";
+                    break;
+                case 2:
+                    echo "<div class='alert alert-success'>No se pudo actualizar los intereses</div>";
                     break;
             }
             echo '<script>
@@ -52,7 +72,7 @@
                         <td scope="row">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" name="dias[]" class="form-check-input" value=" <?php echo $interes['inteDia'] ?> ">
+                                    <input type="checkbox" name="ediDias[]" class="form-check-input" value=" <?php echo $interes['inteDia'] ?> ">
                                 </label>
                             </div>
                         </td>

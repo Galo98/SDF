@@ -7,8 +7,7 @@ insert into facturas (factMonto,factFecIni,factFecVen,interes) values (monto,"fe
 delete from facturas where factID BETWEEN 1 and 4;
 insert into intereses  (inteDia,intePorce) values (0,0);
 select * from facturas;
-select * from intereses;
-SELECT
+select * from intereses;SELECT
     facturas.*,
     intereses.intePorce,
     DATE_FORMAT(factFecIni, '%d/%m/%Y') as factFecIni,

@@ -11,14 +11,15 @@ class ModelosFormularios{
         /* stmt = statement = declaracion 
             prepare() prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia sql puede contener cero o mas marcadores de parametros con nombre (:name) o signos de interrogacion (?) por los cuales los valores reales seran sustituidos cuando sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente parametros
         */
+        $factFecVen = date('Y-m-d', strtotime($datos['factFecIni'] . ' +30 days'));
 
-        $stmt = Conexion::contectar() -> prepare("insert into $tabla (factMonto,factFecIni,interes) values (:factMonto,:factFecIni,0);");
+        $stmt = Conexion::contectar() -> prepare("insert into $tabla (factMonto,factFecIni,factFecVen,interes) values (:factMonto,:factFecIni,:factFecVen,0);");
 
         /* bindParam() Vincula una variable de php a un parametro de substitucion con nombre o de signo de interrogacion correspondiente de la sentencia SQL que fue usada para preparar la sentencia */
 
         $stmt -> bindParam(":factMonto",$datos['factMonto'], PDO::PARAM_STR);
         $stmt -> bindParam(":factFecIni", $datos['factFecIni'], PDO::PARAM_STR);
-
+        $stmt->bindParam(":factFecVen", $factFecVen, PDO::PARAM_STR);
         if($stmt->execute()){
             $err = 1;
         }else{
@@ -42,26 +43,30 @@ class ModelosFormularios{
 
             $stmt->execute();
             return $stmt->fetchAll();
+            $stmt->closeCursor();
+            $stmt = null;
         }else{
             $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce from $tabla inner join intereses on facturas.interes = intereses.inteDia where $item = $valor;");
 
             $stmt->execute();
             return $stmt->fetch();
+
+            $stmt->closeCursor();
+            $stmt = null;
         }
 
-
-
-        $stmt->closeCursor();
-        $stmt = null;
     }
     #endregion
 
     #region ActualizarFacturas
     static public function mdlActualizarFactura($tabla, $datos){
-        $stmt = Conexion::contectar()->prepare("update $tabla set factMonto =:factMonto , factFecIni=:factFecIni where factID = :factID");
+        $factFecVen = date('Y-m-d', strtotime($datos['factFecIni'] . ' +30 days'));
+
+        $stmt = Conexion::contectar()->prepare("update $tabla set factMonto =:factMonto , factFecIni=:factFecIni ,factFecVen=:factFecVen where factID = :factID");
 
         $stmt->bindParam(":factMonto",$datos['factMonto']);
         $stmt->bindParam(":factFecIni", $datos['factFecIni']);
+        $stmt->bindParam(":factFecVen", $factFecVen);
         $stmt->bindParam(":factID", $datos['factID']);
         
         if ($stmt->execute()) {
@@ -79,8 +84,7 @@ class ModelosFormularios{
 
     #region ingresoDeIntereses
 
-    static public function mdlIngresoDeIntereses($tabla, $datos)
-    {
+    static public function mdlIngresoDeIntereses($tabla, $datos){
         $stmt = Conexion::contectar()->prepare("INSERT INTO $tabla (inteDia, intePorce) VALUES (:inteDia, :intePorce);");
 
         if ($stmt) {
@@ -115,7 +119,24 @@ class ModelosFormularios{
 
     #endregion
 
+    #region ActualizarIntereses
+    static public function mdlActualizarIntereses($tabla,$porce,$dias){
 
+        $inteDia = implode(",",$dias);
+        
+        $stmt = Conexion::contectar()->prepare("UPDATE $tabla SET intePorce = :intePorce WHERE inteDia IN ($inteDia)");
+
+        $stmt->bindParam(":intePorce", $porce);
+
+        if ($stmt->execute()) {
+            $err = 1;
+        } else {
+            $err = 2;
+        }
+
+        return $err;
+    }
+    #endregion
 }
 
 

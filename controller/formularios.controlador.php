@@ -47,8 +47,7 @@
 
     #region ingresarInteres
         static public function ctrIngresarInteres(){
-
-            if (isset($_POST['interes'])) {
+            if (isset($_POST['interes']) && isset($_POST['dias']) && $_POST['dias'] != null) {
                 $tabla = "intereses";
                 $genDias = array(); // Define $genDias fuera de los bloques condicionales
 
@@ -85,6 +84,18 @@
         }
     #endregion
 
+    #region ActualizarIntereses
+        static public function ctrActualizarIntereses(){
+            if(isset($_POST['interes'])){
+                $tabla = "intereses";
+                $dias = $_POST['ediDias'];
+                $porce = $_POST['interes'];
+                $codMsj = ModelosFormularios::mdlActualizarIntereses($tabla, $porce,$dias);
+                return $codMsj;
+            }
+        }
+
+    #endregion
 
     }
 
