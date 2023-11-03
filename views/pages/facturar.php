@@ -13,6 +13,16 @@
             <input type="date" name="f-Fecha" class="form-control custom-date-input" required>
         </div>
 
+        <?php $clientes = ControladorFormularios::ctrTraerClientes(); ?>
+
+        <div class="input-group mb-3">
+            <select class="form-select" name="f-Clie" aria-label="Default select example" required>
+                <option selected>Seleccione una opcion</option>
+                <?php foreach ($clientes as $cliente) : ?>
+                    <option value="<?php echo $cliente['cliID']; ?>"><?php echo $cliente['cliNombre'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
         <?php
 
         $Mensaje = ControladorFormularios::ctrIngresarFactura();

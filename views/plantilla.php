@@ -43,6 +43,16 @@
                             </li>
                         <?php endif ?>
 
+                        <?php if ($_GET['pagina'] == "altaClientes") : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=altaClientes">Cargar Clientes</a>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?pagina=altaClientes">Cargar Clientes</a>
+                            </li>
+                        <?php endif ?>
+
                     <?php else : ?>
                         <li class="nav-item">
                             <a class="nav-link active" href="index.php?pagina=inicio">Inicio</a>
@@ -52,6 +62,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?pagina=intereses">Intereses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?pagina=altaClientes">Cargar Clientes</a>
                         </li>
                     <?php endif ?>
 
@@ -72,7 +85,8 @@
                         $_GET['pagina'] == "inicio" ||
                         $_GET['pagina'] == "facturar" ||
                         $_GET['pagina'] == "intereses" ||
-                        $_GET['pagina'] == "ediFact"
+                        $_GET['pagina'] == "ediFact" ||
+                        $_GET['pagina'] == "altaClientes"
                     ) {
                         include "pages/" . $_GET['pagina'] . ".php";
                     } else {
@@ -85,7 +99,7 @@
             </div>
         </div>
     </main>
-    
+
 
     <footer></footer>
 

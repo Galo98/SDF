@@ -13,13 +13,14 @@ class ModelosFormularios{
         */
         $factFecVen = date('Y-m-d', strtotime($datos['factFecIni'] . ' +30 days'));
 
-        $stmt = Conexion::contectar() -> prepare("insert into $tabla (factMonto,factFecIni,factFecVen,interes) values (:factMonto,:factFecIni,:factFecVen,0);");
+        $stmt = Conexion::contectar() -> prepare("insert into $tabla (factMonto,factFecIni,factFecVen,interes,cliID) values (:factMonto,:factFecIni,:factFecVen,0,:factClie);");
 
         /* bindParam() Vincula una variable de php a un parametro de substitucion con nombre o de signo de interrogacion correspondiente de la sentencia SQL que fue usada para preparar la sentencia */
 
         $stmt -> bindParam(":factMonto",$datos['factMonto'], PDO::PARAM_STR);
         $stmt -> bindParam(":factFecIni", $datos['factFecIni'], PDO::PARAM_STR);
         $stmt->bindParam(":factFecVen", $factFecVen, PDO::PARAM_STR);
+        $stmt->bindParam(":factClie", $datos['factClie'], PDO::PARAM_STR);
         if($stmt->execute()){
             $err = 1;
         }else{
@@ -39,14 +40,14 @@ class ModelosFormularios{
 
         if($item == null && $valor == null){
 
-            $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, DATE_FORMAT(factFecIni,'%d/%m/%Y') as factFecIni, DATE_FORMAT(factFecVen,'%d/%m/%Y') as factFecVen from $tabla inner join intereses on facturas.interes = intereses.inteDia order by factID ASC;");
+            $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, DATE_FORMAT(factFecIni,'%d/%m/%Y') as factFecIni, DATE_FORMAT(factFecVen,'%d/%m/%Y') as factFecVen, clientes.cliNombre from $tabla inner join intereses on facturas.interes = intereses.inteDia inner join clientes on clientes.cliID = facturas.cliID order by factID DESC;");
 
             $stmt->execute();
             return $stmt->fetchAll();
             $stmt->closeCursor();
             $stmt = null;
         }else{
-            $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce from $tabla inner join intereses on facturas.interes = intereses.inteDia where $item = $valor;");
+            $stmt = Conexion::contectar()->prepare("select facturas.*, intereses.intePorce, clientes.cliNombre from $tabla inner join clientes on clientes.cliID = facturas.cliID  inner join intereses on facturas.interes = intereses.inteDia where $item = $valor;");
 
             $stmt->execute();
             return $stmt->fetch();
@@ -175,6 +176,44 @@ class ModelosFormularios{
         $stmt = null;
     }
     #endregion
+
+    #region IngresoDeClientes
+
+    static public function mdlIngresoDeClientes($tabla, $datos)
+    {
+        $stmt = Conexion::contectar()->prepare("INSERT INTO $tabla (cliNombre) VALUES (:cliNombre);");
+        if ($stmt) {
+            
+            $stmt->bindParam(":cliNombre", $datos, PDO::PARAM_STR);
+            $stmt->execute();
+            $stmt->closeCursor();
+            $stmt = null;
+            $err = 1;
+        } else {
+            $err = Conexion::contectar()->errorInfo();
+        }
+
+        return $err;
+    }
+    #endregion
+
+    #region SeleccionarIntereses
+
+    static public function mdlSeleccionarClientes($tabla)
+    {
+
+        $stmt = Conexion::contectar()->prepare("select * from $tabla;");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->closeCursor();
+        $stmt = null;
+    }
+
+    #endregion
+
 }
 
 

@@ -14,6 +14,7 @@
  <table class="table">
      <thead>
          <tr>
+             <th class="text-center" scope="col">Cliente</th>
              <th class="text-center" scope="col">Fecha</th>
              <th class="text-center" scope="col">Monto</th>
              <th class="text-center" scope="col">Vencimiento</th>
@@ -29,6 +30,7 @@
                 ($cuenta == 0) ? $total = $factura['factMonto'] : $total = $cuenta;
             ?>
              <tr>
+                 <td class="text-center" scope="row"><?php echo $factura['cliNombre']; ?></td>
                  <td class="text-center" scope="row"><?php echo $factura['factFecIni']; ?></td>
                  <td class="text-center" scope="row"><?php echo $factura['factMonto']; ?></td>
                  <td class="text-center" scope="row"><?php echo $factura['factFecVen']; ?></td>

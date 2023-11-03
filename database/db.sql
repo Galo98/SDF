@@ -8,13 +8,22 @@ create table intereses(
     primary key (inteDia)
 );
 
+create table
+    clientes(
+        cliID int auto_increment,
+        cliNombre varchar(42),
+        primary key (cliID)
+    );
+    
 create table facturas(
     factID int auto_increment,
     factMonto float(9.2),
     factFecIni date,
     factFecVen date,
     interes int,
-    primary key (factID,factFecIni),
+    cliID int,
+    primary key (factID,factFecIni), 
+    foreign key (cliID) references clientes(cliID),
     foreign key (interes) references intereses(inteDia)
 );
 

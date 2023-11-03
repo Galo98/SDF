@@ -130,3 +130,5 @@ SET
         )
     )
 WHERE f.factFecVen < CURDATE();
+
+select * from clientes;

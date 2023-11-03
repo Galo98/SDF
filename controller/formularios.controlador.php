@@ -5,10 +5,11 @@
     #region ingresarFactura
         static public function ctrIngresarFactura(){
 
-             if(isset($_POST['f-Monto']) && isset($_POST['f-Fecha'])){
+             if(isset($_POST['f-Monto']) && isset($_POST['f-Fecha']) && isset($_POST['f-Clie'])){
                  $tabla = "facturas";
                  $datos = array("factMonto" => $_POST['f-Monto'],
-                                 "factFecIni" => $_POST['f-Fecha']);
+                                "factFecIni" => $_POST['f-Fecha'],
+                                "factClie" => $_POST['f-Clie']);
                  $codMsj = ModelosFormularios::mdlFacturar($tabla,$datos);
              }
 
@@ -141,6 +142,30 @@
             }
             }
         }
+    #endregion
+
+    #region IngresarClientes
+    static public function ctrIngresarClientes()
+    {
+        if (isset($_POST['Cli'])) {
+            $tabla = "clientes";            
+            $datos = $_POST['Cli'];
+
+            $codMsj = ModelosFormularios::mdlIngresoDeClientes($tabla, $datos);
+
+            return $codMsj;
+        }
+    }
+    #endregion
+
+    #region traerIntereses
+    static public function ctrTraerClientes()
+    {
+        $tabla = "clientes";
+        $respuesta = ModelosFormularios::mdlSeleccionarClientes($tabla);
+
+        return $respuesta;
+    }
     #endregion
 
     }
