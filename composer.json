@@ -1,0 +1,13 @@
+{
+    "name": "keltoi/sdf",
+    "description": "\"sistema de facturacion\"",
+    "authors": [
+        {
+            "name": "Galo98",
+            "email": "galonahuel98@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.29"
+    }
+}

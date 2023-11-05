@@ -142,3 +142,6 @@ select clientes.cliNombre,SUM(facturas.factMonto) as monto_total from facturas i
 CALL CalculaPorcentajeMontoTotal();
 -- para Facturas vencidas por cliente
 select clientes.cliNombre,sum(case when facturas.interes > 0 then 1 else 0 end) as cantidad_facturas_vencidas from facturas inner join clientes on clientes.cliID = facturas.cliID group by facturas.cliID;
+
+select * from clientes;
+

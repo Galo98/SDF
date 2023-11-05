@@ -31,7 +31,7 @@ insert into intereses values (0,0);
 
 CREATE PROCEDURE GENERAR_FACTURAS() BEGIN 
 	SET @factMonto = 1000;
-	WHILE @factMonto <= 20000
+	WHILE @factMonto <= 50000
 	DO 
 	SET @factFecIni = CONCAT(YEAR(NOW()), '-', LPAD(FLOOR(RAND() * 12) + 1, 2, '0'), '-', LPAD(FLOOR(RAND() * 31 + 1), 2, '0'));
 	REPEAT
@@ -39,9 +39,9 @@ CREATE PROCEDURE GENERAR_FACTURAS() BEGIN
     UNTIL @factFecIni IS NOT NULL END REPEAT;
     SET @factFecVen = @factFecIni + INTERVAL 30 DAY;
 	SET @interes = 0;
-	SET @cliID = FLOOR(RAND() * 10);
+	SET @cliID = FLOOR(RAND() * 38);
     WHILE @cliID = 0 DO 
-        SET @cliID = FLOOR(RAND() * 10);
+        SET @cliID = FLOOR(RAND() * 38);
     END WHILE;
 	INSERT INTO
 	    facturas (
@@ -64,7 +64,7 @@ END;
 
 CALL generar_facturas();
 
--- drop procedure GENERAR_FACTURAS;
+--drop procedure GENERAR_FACTURAS;
 
 
 DELIMITER //

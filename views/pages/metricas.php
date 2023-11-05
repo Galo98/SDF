@@ -3,6 +3,10 @@
 $CTV = ControladorMetricas::ctrCTV();
 $MTV = ControladorMetricas::ctrMTV();
 $PVPC = ControladorMetricas::ctrPVPC();
+if(isset($_POST['descarga'])){
+    ControladorMetricas::ctrExtraerAexcl();
+    echo "ENTRO A LA DESCARGA";
+}
 
 ?>
 <div class="container">
@@ -12,6 +16,12 @@ $PVPC = ControladorMetricas::ctrPVPC();
                 Cantidad Total de Ventas
                 <?php echo $CTV['VentasTotales']; ?>
             </div>
+        </div>
+        <div class="col">
+            <form method="POST">
+                <input type="hidden" name="descarga">
+                <button type="submit">Descargar EXCEL</button>
+            </form>
         </div>
         <div class="col card">
             <div class="card-body ">
