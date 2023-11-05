@@ -131,4 +131,14 @@ SET
     )
 WHERE f.factFecVen < CURDATE();
 
-select * from clientes;
+
+-- para Total ventas (total cantidad de ventas)
+select count(factID) from facturas;
+-- para Total Monto (Monto total vendido)
+select sum(`factMonto`) from facturas;
+-- para Total Ventas por cliente
+select clientes.cliNombre,SUM(facturas.factMonto) as monto_total from facturas inner join clientes on clientes.cliID = facturas.cliID group by facturas.cliID;
+-- para Porcentaje de ventas Por cliente
+CALL CalculaPorcentajeMontoTotal();
+-- para Facturas vencidas por cliente
+select clientes.cliNombre,sum(case when facturas.interes > 0 then 1 else 0 end) as cantidad_facturas_vencidas from facturas inner join clientes on clientes.cliID = facturas.cliID group by facturas.cliID;

@@ -1,0 +1,18 @@
+:root {
+    --color-negro: #000000;
+    --color-gris-claro: #e7ecef;
+    --color-gris-carbon: #495057;
+    --color-azul-marino: #000080;
+    --color-verde-bosque: #006400;
+    --color-morado-oscuro: #800080;
+    --color-rojo-granate: #800000;
+    --color-marron-oscuro: #8B4513;
+    --color-azul-medianoche: #191970;
+    --color-verde-botella: #0D98BA;
+
+}
+
+
+body{
+    background-color: var(--color-gris-claro);
+}
